@@ -1,0 +1,5 @@
+---
+- hosts: [myrouters]
+
+  roles:
+   - myproject

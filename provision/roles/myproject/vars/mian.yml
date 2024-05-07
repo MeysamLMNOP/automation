@@ -1,0 +1,14 @@
+ospf_output:
+  output_router_ospf:
+    router_ospf_1:
+      stdout_lines:
+        - "OSPF process 1 configured successfully."
+    network_172_16_1_284:
+      stdout_lines:
+        - "Network 172.16.1.284/30 added to OSPF process 1."
+    network_172_16_2_284:
+      stdout_lines:
+        - "Network 172.16.2.284/30 added to OSPF process 1."
+    network_172_16_3_284:
+      stdout_lines:
+        - "Network 172.16.3.284/30 added to OSPF process 1."

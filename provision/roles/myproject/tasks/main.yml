@@ -1,0 +1,71 @@
+- name: -------------change Router1 Hostname-----------
+  ios_config:
+    lines:
+      - hostname Meysam.R1
+  tags: hostname_modified_r1
+
+- name: ---show ip interface-----
+  ios_command:
+    commands:
+      - show ip interface brief
+  register: show_ip_brief
+  tags: show_ip_cli_r1
+
+- name: ---Show IP Configuration----
+  debug:
+    var: show_ip_brief 
+  tags: verification_of_ipconfig_r1
+
+- name: ---Configuration Of OSPF----
+  ios_config:
+    lines:
+      - router ospf 1
+      - router-id 1.1.1.1
+      - network 172.16.1.248 0.0.0.3 area 0
+  tags: ospf_configuration_r1
+
+- name: ---Verification Of OSPF Configuration----
+  ios_command:
+    commands:
+      - show ip ospf interface
+  register: ospf_configuration_output
+  tags: ospf_verification_r1
+
+- name: ---OSPF Configuration Results------
+  debug:
+    var: ospf_configuration_output
+  tags: ospf_Verification_result_r1
+
+- name: ---Brief Verification Of OSPF Configuration----
+  ios_command:
+    commands:
+      - show ip ospf interface brief
+  register: ospf_configuration_output_brief
+  tags: brief_ospf_verification_r1
+
+- name: ---Brief OSPF Configuration Results------
+  debug:
+    var: ospf_configuration_output_brief
+  tags: brief_ospf_Verification_result_r1
+
+- name: ---Configuration Of EIGRP----
+  ios_config:
+    lines:
+      - router eigrp 200
+      - eigrp router-id 2.2.2.2
+      - no auto-summary
+      - network 172.16.2.248 0.0.0.3
+      - network 172.16.3.248 0.0.0.3
+  tags: eigrp_configuration_r1
+
+- name: ---Brief Verification Of EIGRP Configuration----
+  ios_command:
+    commands:
+      - show ip eigrp interfaces detail
+  register: eigrp_configuration_output_brief
+  tags: brief_eigrp_verification_r1
+
+- name: ---Brief OSPF Configuration Results------
+  debug:
+    var: eigrp_configuration_output_brief
+  tags: brief_eigrp_Verification_result_r1
