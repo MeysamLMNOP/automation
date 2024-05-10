@@ -69,3 +69,6 @@
   debug:
     var: eigrp_configuration_output_brief
   tags: brief_eigrp_Verification_result_r1
+
+- name: Set up loopback interface
+      ansible.builtin.command: ip addr add 192.168.1.1/32 dev
